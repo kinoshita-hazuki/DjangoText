@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 
-def firstproject(request):
-    responseobject = HttpResponse('hello python')
+def hellopythonfunc(request):
+    responseobject = HttpResponse('<h1>hello python</h1>')
+    setattr = HttpResponse('Pythonを楽しみましょう！')
     return responseobject
