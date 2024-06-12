@@ -17,8 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import hellopythonfunc
+from firstproject import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hellopythonurl/',hellopythonfunc),
+    path('', views.hellopythonfunc, name='hellopythonfunc'),
 ]

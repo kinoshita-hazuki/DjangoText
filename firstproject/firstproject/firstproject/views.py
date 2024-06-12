@@ -1,6 +1,7 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 def hellopythonfunc(request):
-    responseobject = HttpResponse('<h1>hello python</h1>')
-    setattr = HttpResponse('Pythonを楽しみましょう！')
-    return responseobject
+    context = {
+        'greeting': 'Pythonを楽しみましょう！'
+    }
+    return render(request, 'hellopython.html', context)
