@@ -18,8 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from .views import hellopythonfunc
 from firstproject import views
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.hellopythonfunc, name='hellopythonfunc'),
+    path('', include('Cont01.urls')),
 ]
