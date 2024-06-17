@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>form.html</title>
+    <meta charset="UTF-8">
+    <title>form.html</title>
 </head>
 <body>
-    <span>{{ user }}は<span>{{ userlen }}文字です<br>
-        <span>{{ address }}は<span>{{ addrlen }}文字です<br>
-        <a href="{% url 'input' %}">戻る</a>
+<span>{{ user }}は{{ userlen }}文字です<br>
+<span>{{ address }}は{{ addrlen }}文字です<br>
+<a href="{% url 'input' %}">戻る</a>
 </body>
 </html>

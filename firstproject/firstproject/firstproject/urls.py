@@ -23,5 +23,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.hellopythonfunc, name='hellopythonfunc'),
-    path('', include('Cont01.urls')),
+    path('sample/', include('Cont01.urls')),
 ]
