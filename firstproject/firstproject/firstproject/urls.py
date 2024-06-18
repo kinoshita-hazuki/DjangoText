@@ -19,9 +19,10 @@ from django.urls import path
 from .views import hellopythonfunc
 from firstproject import views
 from django.urls import path, include
+from Cont01.views import home_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.hellopythonfunc, name='hellopythonfunc'),
-    path('sample/', include('Cont01.urls')),
+    path('', home_view, name='home'),
+    
 ]

@@ -5,3 +5,4 @@ def hellopythonfunc(request):
         'greeting': 'Pythonを楽しみましょう！'
     }
     return render(request, 'hellopython.html', context)
+
