@@ -69,24 +69,61 @@ def employee_index(request):
     employees = Employee.objects.all()
     return render(request, 'employee/index.html', {'employees': employees})
 
-def update_employee(request):
+# def update_employee(request):
+#     if request.method == 'POST':
+#         no = request.POST.get('no')
+#         name = request.POST.get('name')
+#         salary = request.POST.get('salary')
+
+#         employee = get_object_or_404(Employee, no=no)
+#         employee.name = name
+#         employee.salary = salary
+#         employee.save()
+
+#         return render(request, 'employee/save.html', {'employee': employee})
+#     return HttpResponse("Invalid request", status=400)
+
+# def delete_employee(request):
+#     if request.method == 'POST':
+#         no = request.POST.get('no')
+#         employee = get_object_or_404(Employee, no=no)
+#         employee.delete()
+#         return redirect('/employee/')
+#     return HttpResponse("Invalid request", status=400)
+
+def new_employee(request):
+    return render(request, 'employee/new.html')
+
+def create_employee(request):
     if request.method == 'POST':
         no = request.POST.get('no')
         name = request.POST.get('name')
         salary = request.POST.get('salary')
 
-        employee = get_object_or_404(Employee, no=no)
-        employee.name = name
-        employee.salary = salary
+        employee = Employee(no=no, name=name, salary=salary)
         employee.save()
 
         return render(request, 'employee/save.html', {'employee': employee})
     return HttpResponse("Invalid request", status=400)
 
-def delete_employee(request):
+def employee_index(request):
+    employees = Employee.objects.all()
+    return render(request, 'employee/index.html', {'employees': employees})
+
+def edit_employee(request, no):
+    employee = get_object_or_404(Employee, pk=no)
+    return render(request, 'employee/edit.html', {'employee': employee})
+
+def update_employee(request, no):
     if request.method == 'POST':
-        no = request.POST.get('no')
-        employee = get_object_or_404(Employee, no=no)
-        employee.delete()
-        return redirect('/employee/')
+        employee = get_object_or_404(Employee, pk=no)
+        employee.name = request.POST.get('name')
+        employee.salary = request.POST.get('salary')
+        employee.save()
+        return redirect('employee_list')
     return HttpResponse("Invalid request", status=400)
+
+def delete_employee(request, no):
+    employee = get_object_or_404(Employee, pk=no)
+    employee.delete()
+    return redirect('employee_list')

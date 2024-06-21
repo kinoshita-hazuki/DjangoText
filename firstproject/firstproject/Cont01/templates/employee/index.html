@@ -2,19 +2,29 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>employee/index</title>
+    <title>Employee List</title>
 </head>
 <body>
     <h1>Employee List</h1>
     <table border="1">
-        <tr><th>no</th><th>name</th><th>salary</th></tr>
+        <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
         {% for employee in employees %}
         <tr>
             <td>{{ employee.no }}</td>
             <td>{{ employee.name }}</td>
             <td>{{ employee.salary }}</td>
+            <td>
+                <a href="{% url 'edit_employee' employee.no %}">Edit</a>
+                <a href="{% url 'delete_employee' employee.no %}">Delete</a>
+            </td>
         </tr>
         {% endfor %}
     </table>
+    <a href="{% url 'new_employee' %}">New</a>
 </body>
 </html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Employee</title>
+</head>
+<body>
+    <h1>Edit Employee</h1>
+    <form action="{% url 'update_employee' employee.no %}" method="post">
+        {% csrf_token %}
+        <label for="no">No:</label>
+        <input type="text" id="no" name="no" value="{{ employee.no }}" readonly><br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ employee.name }}"><br>
+        <label for="salary">Salary:</label>
+        <input type="text" id="salary" name="salary" value="{{ employee.salary }}"><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
