@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Employee
+from .models import Employee,Department
 from django.views import View
 
 def home_view(request):
@@ -127,3 +127,28 @@ def delete_employee(request, no):
     employee = get_object_or_404(Employee, pk=no)
     employee.delete()
     return redirect('employee_list')
+
+def department_list(request):
+    departments = Department.objects.all()
+    return render(request, 'department_list.html', {'departments': departments})
+
+def department_detail(request, no):
+    department = get_object_or_404(Department, pk=no)
+    return render(request, 'department_detail.html', {'department': department})
+
+def init_view(request):
+    Employee.objects.all().delete()
+    Department.objects.all().delete()
+
+    dept1 = Department.objects.create(no=101, name='総務部')
+    dept2 = Department.objects.create(no=201, name='経理部')
+    dept3 = Department.objects.create(no=301, name='技術部')
+
+    Employee.objects.create(no=1234, name='田中', salary=540000, department=dept1)
+    Employee.objects.create(no=2345, name='山田', salary=380000, department=dept3)
+    Employee.objects.create(no=3456, name='鈴木', salary=250000, department=dept2)
+    Employee.objects.create(no=4567, name='山本', salary=290000, department=dept2)
+    Employee.objects.create(no=5678, name='木村', salary=470000, department=dept3)
+    Employee.objects.create(no=6789, name='村田', salary=330000, department=dept1)
+
+    return redirect('/employee/')
