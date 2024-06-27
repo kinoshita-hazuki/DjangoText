@@ -7,6 +7,13 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.name
+    
+class EmployeeManager(models.Manager):
+    def find_veteran(self):
+        return self.filter(no__lt=3000)
+    
+    def find_by_name_like_prefix(self, name):
+        return self.filter(name__icontains=name)
 
 class Department(models.Model):
     no = models.IntegerField(primary_key=True)
@@ -23,4 +30,16 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Department2(models.Model):
+    no = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255)
+
+class Employee2(models.Model):
+    no = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255)
+    salary = models.IntegerField()
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+
+    objects = EmployeeManager()
 # Create your models here.

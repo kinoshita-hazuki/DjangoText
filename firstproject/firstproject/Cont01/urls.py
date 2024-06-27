@@ -17,6 +17,7 @@ from Cont01.views import (
     edit_employee,
     department_detail,
     department_list,
+    department_search
 )
 
 urlpatterns = [
@@ -43,5 +44,8 @@ urlpatterns = [
     path('departments/', department_list, name='department_list'),
     path('departments/<int:no>/', department_detail, name='department_detail'),
     path('init/', views.init_view, name='init'),
-
+    path('department/', views.department_index, name='department_index'),
+    path('department/search/', views.department_search, name='department_search'),
+    path('employee/veterans/', views.veteran_employees, name='veteran_employees'),
+    path('employee/search/', views.search_employees_by_name, name='search_employees_by_name'),
 ]

@@ -152,3 +152,22 @@ def init_view(request):
     Employee.objects.create(no=6789, name='村田', salary=330000, department=dept1)
 
     return redirect('/employee/')
+
+def department_index(request):
+    context = {'dept': Department()}
+    return render(request, 'department/index.html', context)
+
+def department_search(request):
+    no = request.GET.get('no')
+    dept = get_object_or_404(Department, no=no)
+    context = {'dept': dept}
+    return render(request, 'department/index.html', context)
+
+def veteran_employees(request):
+    veterans = Employee.objects.find_veteran()
+    return render(request, 'employee/veterans.html', {'employees': veterans})
+
+def search_employees_by_name(request):
+    name = request.GET.get('name', '')
+    employees = Employee.objects.find_by_name_like_prefix(name)
+    return render(request, 'employee/search.html', {'employees': employees})
