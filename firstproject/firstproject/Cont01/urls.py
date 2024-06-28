@@ -17,7 +17,9 @@ from Cont01.views import (
     edit_employee,
     department_detail,
     department_list,
-    department_search
+    department_search,
+    employee_create_view, 
+    employee_list_view
 )
 
 urlpatterns = [
@@ -30,8 +32,8 @@ urlpatterns = [
     path('employees/', EmployeeController.as_view(), name='employee_list'),
     path('employees/<int:no>/', EmployeeController.as_view(), name='employee_detail'),
     path('init/', init_employees, name='init_employees'),
-    path('employee/', employee_index, name='employee_index'),
-    path('employees/new/', new_employee, name='new_employee'), 
+    path('employee/', employee_list_view, name='employee_list'),
+    path('employee/new/', employee_create_view, name='employee_create'), 
     path('employee/', employee_index, name='employee_index'),
     path('update/', update_employee, name='update_employee'),
     path('delete/', delete_employee, name='delete_employee'),  

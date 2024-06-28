@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import MinValueValidator
+from django.utils.translation import gettext_lazy as _
 
 class Employee(models.Model):
     no = models.IntegerField(primary_key=True)  # 社員番号
@@ -23,13 +25,27 @@ class Department(models.Model):
         return self.name
 
 class Employee(models.Model):
-    no = models.IntegerField(primary_key=True)
+    no = models.IntegerField(
+        primary_key=True,
+        validators=[
+           MinValueValidator(1000, message=_("1000以上の数値で入力してください")) 
+        ]
+    )
     name = models.CharField(max_length=255)
-    salary = models.IntegerField()
+    salary = models.IntegerField(validators=[MinValueValidator(0, "給与額の入力は必須です")])
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
+    dept_no = models.IntegerField(default=101)
 
     def __str__(self):
         return self.name
+    
+    def clean(self):
+        if self.no < 1000:
+            raise ValidationError("社員番号は1000以上の数値で入力してください")
+        if not self.name:
+            raise ValidationError("氏名の入力は必須です")
+        if self.salary is None:
+            raise ValidationError("給与額の入力は必須です")
     
 class Department2(models.Model):
     no = models.IntegerField(primary_key=True)

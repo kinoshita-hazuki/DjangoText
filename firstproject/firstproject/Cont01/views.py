@@ -171,3 +171,54 @@ def search_employees_by_name(request):
     name = request.GET.get('name', '')
     employees = Employee.objects.find_by_name_like_prefix(name)
     return render(request, 'employee/search.html', {'employees': employees})
+
+def new_employee_form(request):
+    form = EmployeeForm()
+    return render(request, 'employee/new.html', {'form': form})
+
+def create_employee(request):
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            emp = form.save(commit=False)
+            emp.department = Department.objects.get(no=emp.dept_no)
+            emp.save()
+            return redirect('employee_list')
+        else:
+            return render(request, 'employee/new.html', {'form': form})
+    else:
+        form = EmployeeForm()
+        return render(request, 'employee/new.html', {'form': form})
+
+def edit_employee_form(request, employee_id):
+    employee = get_object_or_404(Employee, pk=employee_id)
+    form = EmployeeForm(instance=employee)
+    return render(request, 'employee/edit.html', {'form': form})
+
+
+def update_employee(request, employee_id):
+    employee = get_object_or_404(Employee, pk=employee_id)
+    form = EmployeeForm(request.POST, instance=employee)
+    if form.is_valid():
+        form.save()
+        return redirect('employee_list')
+    return render(request, 'employee/edit.html', {'form': form})
+
+def delete_employee(request, employee_id):
+    employee = get_object_or_404(Employee, pk=employee_id)
+    employee.delete()
+    return redirect('employee_list')
+
+def employee_create_view(request):
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('employee_list')
+    else:
+        form = EmployeeForm()
+    return render(request, 'employee/new.html', {'form': form})
+
+def employee_list_view(request):
+    employees = Employee.objects.all()
+    return render(request, 'employee/index.html', {'employees': employees})

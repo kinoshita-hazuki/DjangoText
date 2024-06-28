@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>New Employee</title>
+    <title>Employee Form</title>
 </head>
 <body>
     <h1>New Employee</h1>
-    <form action="{% url 'create_employee' %}" method="post">
+    <form method="post">
         {% csrf_token %}
-        <label for="no">No:</label>
-        <input type="text" id="no" name="no"><br>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name"><br>
-        <label for="salary">Salary:</label>
-        <input type="text" id="salary" name="salary"><br>
-        <button type="submit">Submit</button>
+        {{ form.as_p }}
+        <button type="submit">Save</button>
     </form>
 </body>
 </html>
