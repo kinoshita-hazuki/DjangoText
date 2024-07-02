@@ -19,7 +19,11 @@ from Cont01.views import (
     department_list,
     department_search,
     employee_create_view, 
-    employee_list_view
+    employee_list_view,
+    login_view,
+    logout_view,
+    mypage_view,
+    last_view,
 )
 
 urlpatterns = [
@@ -50,4 +54,9 @@ urlpatterns = [
     path('department/search/', views.department_search, name='department_search'),
     path('employee/veterans/', views.veteran_employees, name='veteran_employees'),
     path('employee/search/', views.search_employees_by_name, name='search_employees_by_name'),
+    path('login/', login_view, name='login'),
+    path('mypage/', mypage_view, name='mypage'),
+    path('logout/', logout_view, name='logout'),
+    path('last/', last_view, name='last'),
+    path('home/', home_view, name='home'),
 ]

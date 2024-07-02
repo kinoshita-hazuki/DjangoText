@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractUser
 
 class Employee(models.Model):
     no = models.IntegerField(primary_key=True)  # 社員番号
@@ -59,3 +60,6 @@ class Employee2(models.Model):
 
     objects = EmployeeManager()
 # Create your models here.
+
+class CustomUser(AbstractUser):
+    pass  

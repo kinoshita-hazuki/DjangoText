@@ -1,5 +1,6 @@
 from django import forms
 from .models import Employee
+from django.contrib.auth.forms import AuthenticationForm
 
 class EmployeeForm(forms.ModelForm):
     class Meta:
@@ -23,3 +24,13 @@ class EmployeeForm(forms.ModelForm):
         if salary is None:
             raise forms.ValidationError("給与額の入力は必須です")
         return salary
+
+class CustomLoginForm(AuthenticationForm):
+    username = forms.CharField(
+        label='ユーザーID',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    password = forms.CharField(
+        label='パスワード',
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
+    )

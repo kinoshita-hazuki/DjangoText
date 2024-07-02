@@ -25,4 +25,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
     path('', include('Cont01.urls')),
+    path('cont01/', include('Cont01.urls')), 
 ]
