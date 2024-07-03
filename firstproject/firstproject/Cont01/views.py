@@ -5,6 +5,7 @@ from django.views import View
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from .models import UserBean
 
 
 def home_view(request):
@@ -236,6 +237,8 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                user_bean = UserBean(id=user.id, name=user.username)
+                request.session['user_bean'] = {'id': user_bean.id, 'name': user_bean.name}
                 return redirect('mypage')
     else:
         form = AuthenticationForm()
@@ -243,7 +246,11 @@ def login_view(request):
 
 @login_required
 def mypage_view(request):
-    return render(request, 'login/mypage.html')
+    user_bean_data = request.session.get('user_bean')
+    if user_bean_data:
+        user_bean = UserBean(id=user_bean_data['id'], name=user_bean_data['name'])
+        return render(request, 'login/mypage.html', {'user_bean': user_bean})
+    return redirect('login')
 
 def logout_view(request):
     logout(request)
