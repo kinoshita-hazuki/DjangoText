@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .models import UserBean
+from django.core.paginator import Paginator
 
 
 def home_view(request):
@@ -258,3 +259,12 @@ def logout_view(request):
 
 def last_view(request):
     return render(request, 'login/last.html')
+
+def employee_list(request):
+    employee_list = Employee.objects.all()
+    paginator = Paginator(employee_list, 10)  # 1ページに表示するアイテム数を設定
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'employee/list.html', {'page_obj': page_obj})

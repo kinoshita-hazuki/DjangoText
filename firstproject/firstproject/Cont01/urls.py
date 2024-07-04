@@ -59,4 +59,5 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('last/', last_view, name='last'),
     path('home/', home_view, name='home'),
+    path('employees/', views.employee_list, name='employee_list'),
 ]
