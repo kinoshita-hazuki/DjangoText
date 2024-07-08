@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+import bcrypt
 from django.contrib.auth.backends import BaseBackend
 from .models import CustomUser
 
@@ -6,7 +6,7 @@ class CustomUserBackend(BaseBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         try:
             user = CustomUser.objects.get(username=username)
-            if user.check_password(password):
+            if bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
                 return user
         except CustomUser.DoesNotExist:
             return None

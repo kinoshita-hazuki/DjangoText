@@ -126,7 +126,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'example_security.CustomUser'
 AUTHENTICATION_BACKENDS = ['example_security.authentication.CustomUserBackend']
 
-
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/welcome/'
-LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'

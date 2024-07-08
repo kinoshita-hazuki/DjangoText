@@ -19,3 +19,7 @@ def login_view(request):
         else:
             messages.error(request, 'Invalid username or password.')
     return render(request, 'example_security/login.html')
+
+@login_required
+def home_view(request):
+    return render(request, 'example_security/home.html', {'user': request.user})
