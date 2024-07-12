@@ -1,0 +1,21 @@
+<!-- Cont01/templates/department/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Department Index</title>
+</head>
+<body>
+    <h1>Department Search</h1>
+    <form method="get" action="{% url 'department_search' %}">
+        <label for="no">Department No:</label>
+        <input type="text" id="no" name="no" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if dept %}
+        <h2>Department Details</h2>
+        <p>No: {{ dept.no }}</p>
+        <p>Name: {{ dept.name }}</p>
+    {% endif %}
+</body>
+</html>

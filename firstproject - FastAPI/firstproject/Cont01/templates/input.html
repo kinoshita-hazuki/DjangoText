@@ -1,0 +1,12 @@
+{% extends "appname/base.html" %}
+
+{% block title %}input.html{% endblock %}
+
+{% block content %}
+<form action="{% url 'form' %}" method="POST">
+    {% csrf_token %}
+    名前：<input type="text" name="user" ><br>
+    住所：<input type="text" name="address"><br>
+    <button type="submit">送信</button>
+</form>
+{% endblock %}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>form.html</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    {% if userlen %}
+    <p>{{ form.user.label }}は{{ userlen }}文字です。</p>
+    <p>{{ form.address.label }}は{{ addrlen }}文字です。</p>
+    <a href="{% url 'input' %}">戻る</a>
+    {% endif %}
+</body>
+</html>

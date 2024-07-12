@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<h1>Login</h1>
+{% if form.errors %}
+<ul>
+    {% for field in form %}
+        {% for error in field.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <label for="id_username">Login Id:</label>
+    <input type="text" name="username" id="id_username" value="{{ form.username.value }}">
+    <br>
+    <label for="id_password">Password:</label>
+    <input type="password" name="password" id="id_password" value="{{ form.password.value }}">
+    <br>
+    <button type="submit">ログイン</button>
+</form>
+</body>
+</html>
