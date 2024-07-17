@@ -1,6 +1,9 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from . import views
+from rest_framework.routers import DefaultRouter
+from .views import EmployeeViewSet
+
 from Cont01.views import (
     EmployeeController,
     home_view, 
@@ -25,6 +28,10 @@ from Cont01.views import (
     mypage_view,
     last_view,
 )
+
+router = DefaultRouter()
+router.register(r'employees', EmployeeViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -60,4 +67,6 @@ urlpatterns = [
     path('last/', last_view, name='last'),
     path('home/', home_view, name='home'),
     path('employees/', views.employee_list, name='employee_list'),
+     path('', include(router.urls)),
 ]
+

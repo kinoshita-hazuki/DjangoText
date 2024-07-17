@@ -1,3 +1,4 @@
+# schemas.py
 from pydantic import BaseModel
 
 class EmployeeBase(BaseModel):
@@ -7,6 +8,9 @@ class EmployeeBase(BaseModel):
     salary: float
 
 class EmployeeCreate(EmployeeBase):
+    pass
+
+class EmployeeUpdate(EmployeeBase):
     pass
 
 class Employee(EmployeeBase):

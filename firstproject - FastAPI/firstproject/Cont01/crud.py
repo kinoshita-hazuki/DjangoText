@@ -14,3 +14,19 @@ def create_employee(db: Session, employee: schemas.EmployeeCreate):
     db.commit()
     db.refresh(db_employee)
     return db_employee
+
+def update_employee(db: Session, employee_id: int, employee: schemas.EmployeeUpdate):
+    db_employee = db.query(models.Employee).filter(models.Employee.no == employee_id).first()
+    if db_employee:
+        for key, value in employee.dict().items():
+            setattr(db_employee, key, value)
+        db.commit()
+        db.refresh(db_employee)
+    return db_employee
+
+def delete_employee(db: Session, employee_id: int):
+    db_employee = db.query(models.Employee).filter(models.Employee.no == employee_id).first()
+    if db_employee:
+        db.delete(db_employee)
+        db.commit()
+    return db_employee
